@@ -1,33 +1,41 @@
 import React from "react";
+import { useState } from "react";
 
 const Content = () => {
+  const [name, setName] = useState("Dave");
+  const [count, setCount] = useState(0);
+
   const handleNameChange = () => {
     const names = ["Edd", "Ed", "Eddy"];
     const potentialIndex = Math.floor(Math.random() * names.length);
-    return names[potentialIndex];
+    setName(names[potentialIndex]);
   };
 
-  const handleClick = () => {
-    console.log("You clicked it!");
+  const handleClick = () => { 
+    setCount(count + 1);
+    console.log(count);
   };
+
   const handleClick2 = (name) => {
-    console.log(`${name} was clicked`);
+    console.log(count);
   };
-  const handleClick3 = (e) => {
-    console.log(e.target.innerText);
-  };
+
+
   return (
     <main>
-      <p onDoubleClick={handleClick}>Hello, {handleNameChange()}!</p>
+      <p onDoubleClick={handleNameChange}>
+        Hello, {name}! (double click on "Hello").
+      </p>
+
+      <button onClick={handleNameChange}>Change name again!</button>
+      <br />
+
+      <p>Understanding hook states using a count variable:</p>
       <button onClick={handleClick}>Click it</button>
       <br />
 
-      <p>Click events with functions:</p>
-      <button onClick={() => handleClick2(handleNameChange())}>Click it</button>
-      <br />
-
-      <p>Click events with events:</p>
-      <button onClick={(e) => handleClick3(e)}>Click it</button>
+      <p>More on hook states:</p>
+      <button onClick={handleClick2}>Click it</button>
     </main>
   );
 };
